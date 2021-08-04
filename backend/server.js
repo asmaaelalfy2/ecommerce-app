@@ -38,21 +38,17 @@ app.use(HandleError);
 
 // const __dirname = path.resolve();
 
+// Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(path.resolve(), '/frontend/build')));
+  // Set static folder
+  app.use(express.static('frontend/build'));
 
-  app.get('*', (req, res) =>
-    res.sendFile(
-      path.resolve(path.resolve(), 'frontend', 'build', 'index.html')
-    )
-  );
-} else {
-  app.get('/', (req, res) => {
-    res.send('API is running....');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
 }
 
-var PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, function () {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
