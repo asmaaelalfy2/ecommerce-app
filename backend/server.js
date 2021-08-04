@@ -42,7 +42,9 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(path.resolve(), '/frontend/build')));
 
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(path.resolve(), 'frontend', 'build', 'index.html'))
+    res.sendFile(
+      path.resolve(path.resolve(), 'frontend', 'build', 'index.html')
+    )
   );
 } else {
   app.get('/', (req, res) => {
@@ -50,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 4000;
+var PORT = process.env.PORT || 4000;
 
 app.listen(
   PORT,
